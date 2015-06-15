@@ -13,17 +13,17 @@ import org.slf4j.LoggerFactory;
 
 import com.branfuse.contact.models.Contact;
 
-public class BaseAccessInMemoryImpl implements
+public class InMemoryContact implements
 		BasicAccess<Contact>, Serializable{
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6549720693403630961L;
-	private static final Logger logger = LoggerFactory.getLogger(BaseAccessInMemoryImpl.class);
+	private static final Logger logger = LoggerFactory.getLogger(InMemoryContact.class);
 	private Map<Long, Contact> contacts;
 	private long id;
 	
-	public BaseAccessInMemoryImpl() {
+	public InMemoryContact() {
 		contacts = new HashMap<>();
 	}
 
