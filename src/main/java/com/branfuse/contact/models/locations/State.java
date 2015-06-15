@@ -25,19 +25,15 @@ public class State implements Serializable{
 				stateId, name, shortName, cities);
 	}
 
-	private final int stateId;
-	private final String name;
-	private final String shortName;
+	private  int stateId;
+	private  String name;
+	private  String shortName;
 	
 	private List<City> cities;
 
-	private State(StateBuilder builder) {
-		this.stateId = builder.getStateId();
-		this.name = builder.getName();
-		this.shortName = builder.getShortName();
-		this.cities = builder.getCities();
+	public State() {
+		cities = new ArrayList<>();
 	}
-	
 	public List<City> getCities(){
 		return Collections.unmodifiableList(cities);
 	}
@@ -54,73 +50,10 @@ public class State implements Serializable{
 		return name;
 	}
 
-	public synchronized String getShortName() {
+	public  String getShortName() {
 		return shortName;
 	}
 
-	public static class StateBuilder {
-		private int stateId = ModelConstants.DEFAULT_ID;
-		private String name;
-		private String shortName;
-		private List<City> cities;
-		
-		public static StateBuilder getInstance() {
-			return new StateBuilder();
-		}
-
-		
-		public StateBuilder id(int stateId){
-			this.stateId = stateId;
-			return this;
-		}
-		public StateBuilder name(String name) {
-			this.name = name;
-			return this;
-		}
-
-		public StateBuilder shortName(String shortName) {
-			this.shortName = shortName;
-			return this;
-		}
-
-		public StateBuilder addCity(City city){
-			getCities().add(city);
-			return this;
-		}
-		
-		public StateBuilder addCities(City... cities){
-			getCities().addAll(Arrays.asList(cities));
-			return this;
-		}
-		
-		public State build() {
-			return new State(this);
-		}
-		
-		private List<City> getCities() {
-			if (cities != null){
-				return cities;
-			} else {
-				cities = new ArrayList<>();
-				return cities;
-			}
-		}
-		private String getName(){
-			return  StringUtils.isBlank(this.name) ? StringUtils.EMPTY
-					: StringUtils.normalizeSpace(name);
-		}
-		
-		private String getShortName(){
-			return StringUtils.isBlank(this.shortName) ? StringUtils.EMPTY
-					: StringUtils.normalizeSpace(shortName);
-		}
-		
-		private int getStateId(){
-			return (stateId >= 0)?stateId:ModelConstants.DEFAULT_ID;
-		}
-		
-
-	}
 
 	@Override
 	public int hashCode() {
@@ -145,5 +78,21 @@ public class State implements Serializable{
 		if (stateId != other.stateId)
 			return false;
 		return true;
+	}
+
+	public void setStateId(int stateId) {
+		this.stateId = stateId;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setShortName(String shortName) {
+		this.shortName = shortName;
+	}
+
+	public void setCities(List<City> cities) {
+		this.cities = cities;
 	}
 }

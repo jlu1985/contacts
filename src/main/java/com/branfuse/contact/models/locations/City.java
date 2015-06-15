@@ -6,6 +6,11 @@ import com.branfuse.contact.models.ModelConstants;
 
 public class City implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2149947299052490666L;
+
 	@Override
 	public String toString() {
 		return String.format("City [cityId=%s, name=%s]", cityId, name);
